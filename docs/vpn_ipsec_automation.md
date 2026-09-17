@@ -147,7 +147,8 @@ Este documento atende aos requisitos da Parte 2 do *Desafio de Automação Redes
 - Em caso de ausência de tráfego:
   - Alertar que o túnel está UP, mas sem tráfego, sugerindo teste de conectividade.
 
-## 6. Arquivos de Configuração de Exemplo (Opcional)
+## 6. Arquivos de Configuração de Exemplo 
 
 - `docs/fortigate_example_config.txt`
 - `docs/paloalto_example_config.txt`
+
