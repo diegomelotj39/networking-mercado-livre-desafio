@@ -35,10 +35,4 @@ Também traz informações sobre como interagir com o frontend ## 2.0
         #### Validar se as VLANs e hostname estão corretos
         #### Exibir alertas caso haja divergências.
 
-## 3.0  Considerações
 
-    ### 3.0.1 Não possuo licença para usar imagens dos vendor a nível pessoal e por isso não foi possivel fazer uso de simuladores GNS3 ou EVE-NG para executar a tarefa, uma vez que não é permitido por lei o uso de imagens fora do appliance dedicado do fabricante ou em ambiente que não esteja licenciado (VIRL/CML). 
-    
-    A licença custa U$199 (equivalente a R$1.000) e no momento não há recursos financeiros reservados para este fim. O Cisco packet tracert não possui os recursos técnicos necessários (não que eu tenha conseguido) para atingir o alvo desejado.
-
-    Em meus estudos pessoais faço uso do devnet cisco modem labs, mas este está em período de manutenção pela cisco
