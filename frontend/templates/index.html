@@ -1,25 +1,859 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
-    <title>Configuração de VLANs</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Network Automation</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef2f7,
+                    #dfe7f1
+                );
+
+            min-height: 100vh;
+
+            color: #1f2937;
+        }
+
+        /* ---------------------------------
+           Cabeçalho
+        --------------------------------- */
+
+        .header {
+            background: #111827;
+
+            color: white;
+
+            padding: 18px 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 2px 10px
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 10px;
+
+            background: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 22px;
+        }
+
+        .brand h1 {
+            font-size: 20px;
+
+            font-weight: 600;
+        }
+
+        .brand span {
+            display: block;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+
+            margin-top: 2px;
+        }
+
+        .status {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 13px;
+
+            color: #d1d5db;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+
+            background: #22c55e;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 0 8px
+                rgba(34, 197, 94, .7);
+        }
+
+
+        /* ---------------------------------
+           Container
+        --------------------------------- */
+
+        .container {
+
+            max-width: 1000px;
+
+            margin: 45px auto;
+
+            padding: 0 20px;
+        }
+
+
+        /* ---------------------------------
+           Título
+        --------------------------------- */
+
+        .page-title {
+
+            margin-bottom: 25px;
+        }
+
+        .page-title h2 {
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            color: #111827;
+        }
+
+        .page-title p {
+
+            margin-top: 6px;
+
+            color: #6b7280;
+
+            font-size: 15px;
+        }
+
+
+        /* ---------------------------------
+           Grid
+        --------------------------------- */
+
+        .grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        /* ---------------------------------
+           Cards
+        --------------------------------- */
+
+        .card {
+
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 6px 20px
+                rgba(15, 23, 42, .08);
+
+            border:
+                1px solid #e5e7eb;
+        }
+
+        .card.full {
+
+            grid-column:
+                1 / -1;
+        }
+
+        .card-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+
+            width: 38px;
+            height: 38px;
+
+            border-radius: 9px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .card-header h3 {
+
+            font-size: 17px;
+
+            color: #111827;
+        }
+
+        .card-header p {
+
+            font-size: 12px;
+
+            color: #6b7280;
+
+            margin-top: 2px;
+        }
+
+
+        /* ---------------------------------
+           Formulários
+        --------------------------------- */
+
+        .form-group {
+
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+
+            margin-bottom: 0;
+        }
+
+        label {
+
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #374151;
+
+            margin-bottom: 7px;
+        }
+
+        input {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border:
+                1px solid #d1d5db;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            color: #111827;
+
+            background: #fff;
+
+            transition:
+                .2s ease;
+        }
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, .12);
+        }
+
+
+        /* ---------------------------------
+           VLAN
+        --------------------------------- */
+
+        .vlan-row {
+
+            display: grid;
+
+            grid-template-columns:
+                110px 1fr;
+
+            gap: 12px;
+
+            align-items: center;
+
+            margin-bottom: 13px;
+        }
+
+        .vlan-label {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: #4b5563;
+        }
+
+
+        /* ---------------------------------
+           Switch
+        --------------------------------- */
+
+        .switch-info {
+
+            background: #f8fafc;
+
+            border-radius: 10px;
+
+            padding: 16px;
+
+            border:
+                1px solid #e5e7eb;
+        }
+
+        .switch-line {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            font-size: 13px;
+        }
+
+        .switch-line:last-child {
+
+            border-bottom: none;
+
+            padding-bottom: 0;
+        }
+
+        .switch-line:first-child {
+
+            padding-top: 0;
+        }
+
+        .switch-line span:first-child {
+
+            color: #6b7280;
+        }
+
+        .switch-line span:last-child {
+
+            font-weight: 600;
+
+            color: #111827;
+        }
+
+
+        /* ---------------------------------
+           Botão
+        --------------------------------- */
+
+        .actions {
+
+            margin-top: 25px;
+
+            display: flex;
+
+            justify-content:
+                flex-end;
+        }
+
+        button {
+
+            border: none;
+
+            background: #2563eb;
+
+            color: white;
+
+            padding:
+                13px 25px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                .2s ease;
+
+            box-shadow:
+                0 4px 10px
+                rgba(37, 99, 235, .25);
+        }
+
+        button:hover {
+
+            background: #1d4ed8;
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 6px 15px
+                rgba(37, 99, 235, .3);
+        }
+
+        button:active {
+
+            transform:
+                translateY(0);
+        }
+
+
+        /* ---------------------------------
+           Rodapé
+        --------------------------------- */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 30px;
+
+            font-size: 12px;
+
+            color: #6b7280;
+        }
+
+
+        /* ---------------------------------
+           Responsivo
+        --------------------------------- */
+
+        @media (max-width: 700px) {
+
+            .header {
+
+                padding:
+                    15px 20px;
+            }
+
+            .status {
+
+                display: none;
+            }
+
+            .container {
+
+                margin-top: 25px;
+            }
+
+            .grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .card.full {
+
+                grid-column:
+                    auto;
+            }
+
+            .vlan-row {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+            .actions {
+
+                justify-content:
+                    stretch;
+            }
+
+            button {
+
+                width: 100%;
+            }
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-    <h1>Configurar VLANs</h1>
 
-    <form action="/aplicar" method="POST">
-        <label>VLAN 10:</label>
-        <input name="vlan10" value="10"><br><br>
 
-        <label>VLAN 20:</label>
-        <input name="vlan20" value="20"><br><br>
+    <!-- =================================
+         CABEÇALHO
+    ================================== -->
 
-        <label>VLAN 50:</label>
-        <input name="vlan50" value="50"><br><br>
+    <header class="header">
 
-        <label>Hostname:</label>
-        <input name="hostname" value="SWITCH_AUTOMATIZADO"><br><br>
+        <div class="brand">
 
-        <button type="submit">Aplicar Configuração</button>
-    </form>
+            <div class="brand-icon">
+                ⚙
+            </div>
+
+            <div>
+
+                <h1>
+                    Network Automation
+                </h1>
+
+                <span>
+                    Sistema de automação de switches
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="status">
+
+            <div class="status-dot"></div>
+
+            Sistema online
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================
+         CONTEÚDO
+    ================================== -->
+
+    <main class="container">
+
+
+        <div class="page-title">
+
+            <h2>
+                Configurar Switch
+            </h2>
+
+            <p>
+                Configure VLANs e hostname através
+                da automação de rede.
+            </p>
+
+        </div>
+
+
+
+        <form action="/aplicar"
+              method="POST">
+
+
+            <div class="grid">
+
+
+                <!-- =========================
+                     VLANs
+                ========================== -->
+
+                <div class="card full">
+
+                    <div class="card-header">
+
+                        <div class="card-icon">
+                            ◈
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Configuração de VLANs
+                            </h3>
+
+                            <p>
+                                Defina os IDs das VLANs
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="vlan-row">
+
+                        <div class="vlan-label">
+                            VLAN 10
+                        </div>
+
+                        <input
+                            type="number"
+                            name="vlan10"
+                            value="10"
+                            min="1"
+                            max="4094"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="vlan-row">
+
+                        <div class="vlan-label">
+                            VLAN 20
+                        </div>
+
+                        <input
+                            type="number"
+                            name="vlan20"
+                            value="20"
+                            min="1"
+                            max="4094"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="vlan-row">
+
+                        <div class="vlan-label">
+                            VLAN 50
+                        </div>
+
+                        <input
+                            type="number"
+                            name="vlan50"
+                            value="50"
+                            min="1"
+                            max="4094"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================
+                     HOSTNAME
+                ========================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-icon">
+                            #
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Identificação
+                            </h3>
+
+                            <p>
+                                Nome do equipamento
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="hostname">
+                            Hostname
+                        </label>
+
+                        <input
+                            type="text"
+                            id="hostname"
+                            name="hostname"
+                            value="SWITCH_AUTOMATIZADO"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================
+                     SWITCH
+                ========================== -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div class="card-icon">
+                            ⚡
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Equipamento
+                            </h3>
+
+                            <p>
+                                Dispositivo configurado
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="switch-info">
+
+                        <div class="switch-line">
+
+                            <span>
+                                Endereço IP
+                            </span>
+
+                            <span>
+                                192.168.1.10
+                            </span>
+
+                        </div>
+
+
+                        <div class="switch-line">
+
+                            <span>
+                                Protocolo
+                            </span>
+
+                            <span>
+                                SSH
+                            </span>
+
+                        </div>
+
+
+                        <div class="switch-line">
+
+                            <span>
+                                Porta
+                            </span>
+
+                            <span>
+                                22
+                            </span>
+
+                        </div>
+
+
+                        <div class="switch-line">
+
+                            <span>
+                                Plataforma
+                            </span>
+
+                            <span>
+                                Cisco IOS
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 BOTÃO
+            ========================== -->
+
+            <div class="actions">
+
+                <button type="submit">
+
+                    Aplicar Configuração
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+
+        <div class="footer">
+
+            Network Automation
+            •
+            Flask + Netmiko
+
+        </div>
+
+
+    </main>
+
 </body>
+
 </html>
