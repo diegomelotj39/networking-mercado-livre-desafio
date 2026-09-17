@@ -1,8 +1,5 @@
 import re
 
-# -----------------------------
-# EXTRAÇÃO DE CONFIG FORTIGATE
-# -----------------------------
 def parse_fortigate(config):
     data = {}
 
@@ -31,9 +28,6 @@ def parse_fortigate(config):
     return data
 
 
-# -----------------------------
-# EXTRAÇÃO DE CONFIG PALO ALTO
-# -----------------------------
 def parse_paloalto(config):
     data = {}
 
