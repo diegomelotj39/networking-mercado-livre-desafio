@@ -32,7 +32,6 @@ def conectar_switch(
 
         connection = ConnectHandler(**device)
 
-        # Entra no modo privilegiado caso tenha sido informado secret
         if secret:
             connection.enable()
 
@@ -122,9 +121,6 @@ def backup_config(
         filename
     )
 
-    # -----------------------------
-    # Salva o backup localmente
-    # -----------------------------
     with open(
         filepath,
         "w",
@@ -134,9 +130,6 @@ def backup_config(
 
     print(f"[OK] Backup salvo em: {filepath}")
 
-    # -----------------------------
-    # Envia para FTP
-    # -----------------------------
     try:
         print(
             "[INFO] Conectando ao servidor FTP 10.10.10.1..."
@@ -251,108 +244,3 @@ def validate_config(
     alerts.extend(vlan_errors)
 
     return alerts
-
-
-# -----------------------------
-# Função Principal
-# -----------------------------
-def main():
-
-    host = "192.168.1.10"
-    username = "admin"
-    password = "cisco"
-    secret = "enablepass"
-
-    vlans = [
-        {
-            "id": 10,
-            "name": "VLAN_DADOS"
-        },
-        {
-            "id": 20,
-            "name": "VLAN_VOZ"
-        },
-        {
-            "id": 50,
-            "name": "VLAN_SEGURANCA"
-        }
-    ]
-
-    # -----------------------------
-    # Conecta ao switch
-    # -----------------------------
-    connection = conectar_switch(
-        ip=host,
-        usuario=username,
-        senha=password,
-        secret=secret
-    )
-
-    # -----------------------------
-    # Configura hostname
-    # -----------------------------
-    configure_hostname(
-        connection
-    )
-
-    # -----------------------------
-    # Configura VLANs
-    # -----------------------------
-    configure_vlans(
-        connection,
-        vlans
-    )
-
-    # -----------------------------
-    # Salva configuração
-    # -----------------------------
-    save_config(
-        connection
-    )
-
-    # -----------------------------
-    # Backup
-    # -----------------------------
-    backup_config(
-        connection
-    )
-
-    # -----------------------------
-    # Validação
-    # -----------------------------
-    alerts = validate_config(
-        connection,
-        vlans
-    )
-
-    if alerts:
-
-        print(
-            "\n[ALERTAS] Problemas encontrados:"
-        )
-
-        for alert in alerts:
-            print(alert)
-
-    else:
-
-        print(
-            "\n[OK] Todas as configurações "
-            "foram validadas com sucesso!"
-        )
-
-    # -----------------------------
-    # Desconecta
-    # -----------------------------
-    connection.disconnect()
-
-    print(
-        "[OK] Conexão encerrada."
-    )
-
-
-# -----------------------------
-# Executa o script
-# -----------------------------
-if __name__ == "__main__":
-    main()
