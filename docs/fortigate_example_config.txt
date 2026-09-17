@@ -1,0 +1,44 @@
+# Configuração Fortigate para tunnel VPN com framework IPSec
+
+config vpn ipsec phase1-interface
+    edit "FGT-PA-TUNNEL"
+        set interface "wan1"
+        set peertype any
+        set remote-gw 200.200.200.1
+        set proposal aes256-sha256
+        set dhgrp 14
+        set authmethod psk
+        set psksecret "P@ssw0rd"
+    next
+end
+
+config vpn ipsec phase2-interface
+    edit "FGT-PA-P2"
+        set phase1name "FGT-PA-TUNNEL"
+        set proposal aes256-sha256
+        set pfs enable
+        set dhgrp 14
+        set src-subnet 10.10.10.0 255.255.255.0
+        set dst-subnet 10.20.20.0 255.255.255.0
+    next
+end
+
+config system interface
+    edit "FGT-PA-TUNNEL"
+        set ip 169.255.1.1 255.255.255.252
+        set type tunnel
+        set remote-ip 169.255.1.2
+    next
+end
+
+config firewall policy
+    edit 100
+        set srcintf "internal"
+        set dstintf "FGT-PA-TUNNEL"
+        set srcaddr "LOCAL-FGT"
+        set dstaddr "REMOTE-PA"
+        set action accept
+        set schedule always
+        set service ALL
+    next
+end
