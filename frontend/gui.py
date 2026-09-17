@@ -1,68 +1,42 @@
+from flask import Flask, render_template, request
+import webbrowser
+import threading
 import sys
 import os
 
-sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+# Permite importar o backend sem alterar estrutura
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from backend.switch_automation import configure_vlans, configure_hostname
 
-import tkinter as tk
-from tkinter import messagebox
+app = Flask(__name__)
 
-from backend.switch_automation import (
-    connect_switch,
-    configure_vlans,
-    configure_hostname,
-    save_config,
-    backup_config,
-    validate_config
-)
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# -----------------------------
-# Função principal de aplicação
-# -----------------------------
-def aplicar_configuracoes():
-    try:
-        # Coleta das VLANs inseridas pelo usuário
-        vlans = []
+@app.route('/aplicar', methods=['POST'])
+def aplicar():
+    vlan10 = request.form['vlan10']
+    vlan20 = request.form['vlan20']
+    vlan50 = request.form['vlan50']
+    hostname = request.form['hostname']
 
-        try:
-            vlans.append({"id": int(vlan1_id.get()), "name": vlan1_name.get()})
-            vlans.append({"id": int(vlan2_id.get()), "name": vlan2_name.get()})
-            vlans.append({"id": int(vlan3_id.get()), "name": vlan3_name.get()})
-        except ValueError:
-            messagebox.showerror("Erro", "IDs das VLANs devem ser números inteiros.")
-            return
+    connection = None
 
-        hostname = hostname_entry.get()
+    vlans = [
+        {'id': vlan10, 'name': 'VLAN_DADOS'},
+        {'id': vlan20, 'name': 'VLAN_VOZ'},
+        {'id': vlan50, 'name': 'VLAN_SEGURANCA'}
+    ]
 
-        # Conectar ao switch
-        conn = connect_switch("192.168.1.10", "admin", "cisco123")
+    configure_vlans(connection, vlans)
+    configure_hostname(connection, hostname)
 
-        # Aplicar configurações
-        configure_vlans(conn, vlans)
-        configure_hostname(conn, hostname)
-        save_config(conn)
+    return "Configuração aplicada com sucesso!"
 
-        # Backup
-        backup_config(conn, hostname)
+def abrir_navegador():
+    webbrowser.open("http://127.0.0.1:5000")
 
-        # Validação
-        alerts = validate_config(conn, vlans, hostname)
-
-        if alerts:
-            messagebox.showwarning("Alertas encontrados", "\n".join(alerts))
-        else:
-            messagebox.showinfo("Sucesso", "Configuração aplicada sem divergências!")
-
-        conn.disconnect()
-
-    except Exception as e:
-        messagebox.showerror("Erro", str(e))
-
-
-# -----------------------------
-# Interface Tkinter
-# -----------------------------
-root = tk.Tk()
-root.title("Automação de Switch Cisco")
-root.geometry("450x450")
-
-tk.Label
+if __name__ == '__main__':
+    threading.Timer(1.5, abrir_navegador).start()
+    app.run(debug=True)
