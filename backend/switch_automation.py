@@ -100,6 +100,10 @@ def backup_config(
     hostname="SWITCH_AUTOMATIZADO",
     backup_dir="backups"
 ):
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76f3ee8e3d9e2c369f783177e1012aa1719a2973
     if not os.path.exists(backup_dir):
         os.makedirs(backup_dir)
 
@@ -165,6 +169,10 @@ def backup_config(
 # Validação de Hostname
 # -----------------------------
 def get_current_hostname(connection):
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76f3ee8e3d9e2c369f783177e1012aa1719a2973
     output = connection.send_command(
         "show running-config | include hostname"
     )
@@ -181,6 +189,7 @@ def get_current_hostname(connection):
 # Validação de VLANs
 # -----------------------------
 def validate_vlans(connection, vlans):
+
     print("[INFO] Validando VLANs...")
 
     output = connection.send_command(
@@ -190,6 +199,7 @@ def validate_vlans(connection, vlans):
     errors = []
 
     for vlan in vlans:
+
         vlan_id = str(vlan["id"])
         vlan_name = vlan["name"]
 
@@ -214,6 +224,10 @@ def validate_config(
     vlans,
     expected_hostname="SWITCH_AUTOMATIZADO"
 ):
+<<<<<<< HEAD
+=======
+
+>>>>>>> 76f3ee8e3d9e2c369f783177e1012aa1719a2973
     print("[INFO] Validando configurações aplicadas...")
 
     alerts = []
@@ -223,6 +237,7 @@ def validate_config(
     )
 
     if current_hostname != expected_hostname:
+
         alerts.append(
             f"[ERRO] Hostname atual "
             f"({current_hostname}) "
