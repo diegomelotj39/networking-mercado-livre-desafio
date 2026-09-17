@@ -56,6 +56,10 @@ def save_config(connection):
 # -----------------------------
 # Backup da Configuração
 # -----------------------------
+from ftplib import FTP
+import os
+import datetime
+
 def backup_config(connection, hostname="SWITCH_AUTOMATIZADO", backup_dir="backups"):
     if not os.path.exists(backup_dir):
         os.makedirs(backup_dir)
@@ -67,11 +71,28 @@ def backup_config(connection, hostname="SWITCH_AUTOMATIZADO", backup_dir="backup
     filename = f"{hostname}_{timestamp}.txt"
     filepath = os.path.join(backup_dir, filename)
 
+    # Salva o backup localmente
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(output)
 
     print(f"[OK] Backup salvo em: {filepath}")
+
+    try:
+        print("[INFO] Conectando ao servidor FTP 10.10.10.1...")
+        ftp = FTP("10.10.10.1")
+        ftp.login("administrador", "P@ssw0rd")
+
+        with open(filepath, "rb") as file:
+            ftp.storbinary(f"STOR {filename}", file)
+
+        ftp.quit()
+        print(f"[OK] Backup enviado para o servidor FTP: {filename}")
+
+    except Exception as e:
+        print(f"[ERRO] Falha ao enviar backup para o FTP: {e}")
+
     return filepath
+
 
 # -----------------------------
 # Validação de Hostname
