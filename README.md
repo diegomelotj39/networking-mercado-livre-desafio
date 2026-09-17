@@ -4,9 +4,10 @@ Este projeto implementa a automação de configuração de um switch Cisco utili
 
 Adicionalmente, o repositório público https://github.com/diegomelotj39/networking-mercado-livre-desafio contém um plano de automação para configuração de uma VPN IPSec entre firewalls Fortigate e Palo Alto.
 
-## 0.0 Conectar no switch;
+## 1.0 Conectar no switch;
+    ### 1.0.1 Conectar no switch fictício 192.168.1.10
 
-## 1. Automatizar a configuração de switch Cisco;
+## 1.1 Automatizar a configuração de switch Cisco;
     ### 1.1 Criar VLANs com IDs e names específicos;
         #### 1.1.1 VLAN ID 10, 20 e 50.
             ##### 1.1.1.1 Names "VLAN_DADOS", "VLAN_VOZ" e "VLAN_SEGURANÇA" respectivamente
