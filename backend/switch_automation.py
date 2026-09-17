@@ -6,21 +6,20 @@ import sys
 # -----------------------------
 # Conexão com o Switch
 # -----------------------------
-def connect_switch(host, username, password, secret=None):
+def conectar_switch(ip="192.168.1.200", usuario="administrador", senha="P@ssw0rd", porta_ssh=22, tipo_dispositivo="cisco_ios"):
     device = {
-        "device_type": "cisco_ios",
-        "host": host,
-        "username": username,
-        "password": password,
-        "secret": secret
+        "device_type": tipo_dispositivo,
+        "host": ip,
+        "username": usuario,
+        "password": senha,
+        "port": porta_ssh,
     }
 
-    try:
-        connection = ConnectHandler(**device)
-        if secret:
-            connection.enable()
-        print(f"[OK] Conectado ao switch {host}")
-        return connection
+    print(f"[INFO] Conectando ao switch {ip} via SSH...")
+    connection = ConnectHandler(**device)
+    print("[OK] Conexão estabelecida com sucesso!")
+    return connection
+    
     except Exception as e:
         print(f"[ERRO] Falha ao conectar ao switch {host}: {e}")
         sys.exit(1)
