@@ -325,13 +325,18 @@
             display: grid;
 
             grid-template-columns:
-                110px 1fr;
+                90px 1fr;
 
-            gap: 12px;
+            gap: 15px;
 
-            align-items: center;
+            align-items: end;
 
-            margin-bottom: 13px;
+            margin-bottom: 18px;
+        }
+
+        .vlan-row:last-child {
+
+            margin-bottom: 0;
         }
 
         .vlan-label {
@@ -341,6 +346,23 @@
             font-weight: 600;
 
             color: #4b5563;
+
+            padding-bottom: 12px;
+        }
+
+        .vlan-fields {
+
+            display: grid;
+
+            grid-template-columns:
+                160px 1fr;
+
+            gap: 15px;
+        }
+
+        .vlan-field label {
+
+            margin-bottom: 7px;
         }
 
 
@@ -514,6 +536,19 @@
 
                 grid-template-columns:
                     1fr;
+
+                gap: 8px;
+            }
+
+            .vlan-label {
+
+                padding-bottom: 0;
+            }
+
+            .vlan-fields {
+
+                grid-template-columns:
+                    1fr;
             }
 
             .actions {
@@ -623,7 +658,7 @@
                             </h3>
 
                             <p>
-                                Defina os IDs das VLANs
+                                Defina o ID e o nome de cada VLAN
                             </p>
 
                         </div>
@@ -631,56 +666,158 @@
                     </div>
 
 
+                    <!-- VLAN 1 -->
+
                     <div class="vlan-row">
 
                         <div class="vlan-label">
-                            VLAN 10
+                            VLAN 1
                         </div>
 
-                        <input
-                            type="number"
-                            name="vlan10"
-                            value="10"
-                            min="1"
-                            max="4094"
-                            required
-                        >
+                        <div class="vlan-fields">
+
+                            <div class="vlan-field">
+
+                                <label for="vlan10">
+                                    ID da VLAN
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="vlan10"
+                                    name="vlan10"
+                                    value="10"
+                                    min="1"
+                                    max="4094"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="vlan-field">
+
+                                <label for="vlan10_name">
+                                    Nome da VLAN
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="vlan10_name"
+                                    name="vlan10_name"
+                                    value="USUARIOS"
+                                    placeholder="Ex.: USUARIOS"
+                                    maxlength="32"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
 
                     </div>
 
 
+                    <!-- VLAN 2 -->
+
                     <div class="vlan-row">
 
                         <div class="vlan-label">
-                            VLAN 20
+                            VLAN 2
                         </div>
 
-                        <input
-                            type="number"
-                            name="vlan20"
-                            value="20"
-                            min="1"
-                            max="4094"
-                            required
-                        >
+                        <div class="vlan-fields">
+
+                            <div class="vlan-field">
+
+                                <label for="vlan20">
+                                    ID da VLAN
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="vlan20"
+                                    name="vlan20"
+                                    value="20"
+                                    min="1"
+                                    max="4094"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="vlan-field">
+
+                                <label for="vlan20_name">
+                                    Nome da VLAN
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="vlan20_name"
+                                    name="vlan20_name"
+                                    value="SERVIDORES"
+                                    placeholder="Ex.: SERVIDORES"
+                                    maxlength="32"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
 
                     </div>
 
 
+                    <!-- VLAN 3 -->
+
                     <div class="vlan-row">
 
                         <div class="vlan-label">
-                            VLAN 50
+                            VLAN 3
                         </div>
 
-                        <input
-                            type="number"
-                            name="vlan50"
-                            value="50"
-                            min="1"
-                            max="4094"
-                            required
-                        >
+                        <div class="vlan-fields">
+
+                            <div class="vlan-field">
+
+                                <label for="vlan50">
+                                    ID da VLAN
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="vlan50"
+                                    name="vlan50"
+                                    value="50"
+                                    min="1"
+                                    max="4094"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="vlan-field">
+
+                                <label for="vlan50_name">
+                                    Nome da VLAN
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="vlan50_name"
+                                    name="vlan50_name"
+                                    value="GERENCIA"
+                                    placeholder="Ex.: GERENCIA"
+                                    maxlength="32"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -764,6 +901,7 @@
 
                     <div class="switch-info">
 
+
                         <div class="switch-line">
 
                             <span>
@@ -795,10 +933,14 @@
                             <span>
                                 Porta
                             </span>
+
                             <span>
                                 22
                             </span>
+
                         </div>
+
+
                         <div class="switch-line">
 
                             <span>
@@ -808,9 +950,15 @@
                             <span>
                                 Cisco IOS
                             </span>
+
                         </div>
+
+
                     </div>
+
                 </div>
+
+
             </div>
 
 
@@ -833,6 +981,10 @@
         </form>
 
 
+
+        <!-- =========================
+             RODAPÉ
+        ========================== -->
 
         <div class="footer">
 
