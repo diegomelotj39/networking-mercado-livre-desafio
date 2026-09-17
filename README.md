@@ -29,4 +29,4 @@ Também traz informações sobre como interagir com o frontend ## 2.0
         1.5.2 Exibir alertas no frontend
         1.5.3 Utilizar Git para versionamento
 
-### 2.0 Interagindo com o FrontEnd
+## 2.0 Interagindo com o FrontEnd
