@@ -21,3 +21,10 @@ set network tunnel ipsec FGT-PA-TUNNEL auto-key proxy-id REMOTE-PA remote 10.20.
 
 # Regras de segurança
 set rulebase security rules VPN-FGT-PA from trust to untrust source 10.10.10.0/24 destination 10.20.20.0/24 application any action allow
+
+# Ao automatizar a configuração entre dispositivos de diferentes fabricantes, ficar atento para esses desafios:
+
+Incompatibilidade de protocolos: fabricantes podem utilizar padrões de configuração diferentes.
+Interoperabilidade: garantir que equipamentos distintos consigam trocar informações corretamente, consultando datasheet.
+Autenticação e segurança: credenciais devem corresponder (neste caso PSK) e os protocolos de criptografia, DH e Profile IPSec devem corresponder.
+Diferenças de comandos: atentar para os padrões de sintaxe diferentes para cada fabricante.

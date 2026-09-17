@@ -42,3 +42,10 @@ config firewall policy
         set service ALL
     next
 end
+
+# Ao automatizar a configuração entre dispositivos de diferentes fabricantes, ficar atento para esses desafios:
+
+Incompatibilidade de protocolos: fabricantes podem utilizar padrões de configuração diferentes.
+Interoperabilidade: garantir que equipamentos distintos consigam trocar informações corretamente, consultando datasheet.
+Autenticação e segurança: credenciais devem corresponder (neste caso PSK) e os protocolos de criptografia, DH e Profile IPSec devem corresponder.
+Diferenças de comandos: atentar para os padrões de sintaxe diferentes para cada fabricante.
