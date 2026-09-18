@@ -58,3 +58,5 @@ Também traz informações sobre como interagir com o frontend ## 2.0
     A licença custa U$199 (equivalente a R$1.000) e no momento não há recursos financeiros reservados para este fim. O Cisco packet tracert não possui os recursos técnicos necessários (não que eu tenha conseguido) para atingir o alvo desejado.
 
     Em meus estudos pessoais faço uso do devnet cisco modem labs, mas este está em período de manutenção pela cisco
+
+    Digno de nota que mesmo não tendo meios de testar a automação em um switch (ios.bin) a automação "chama" o switch fictício cujo IP é 192.168.1.10 via SSH (porta 22)
