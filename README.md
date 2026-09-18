@@ -20,6 +20,22 @@ Também traz informações sobre como interagir com o frontend ## 2.0
     ### 1.5.3 Utilizar Git para versionamento;
 
 ## 2.0 Interagindo com o FrontEnd
+
+    ### Abrir o Visual Studio Code.
+    ### Selecionar: File → Open Folder...
+    ### Selecionar a pasta principal do projeto (C:\Users\diego\OneDrive\Área de Trabalho\Meli\networking-mercado-livre-desafio)
+    ### Abra o terminal do VS Code.
+        No VS Code, acessar: Terminal → New Terminal e então verifique se o Phyton está instalado, por usar o comando "python --version".
+    ### Crie o ambiente virtual, por usar o comando "python -m venv venv"
+    ### Ative o ambiente virtual, por usar o comando ".\venv\Scripts\Activate.ps1" no terminal do VS Code.
+    ### Configure o VS Code para usar o python: No VS Code pressione Ctrl + Shift + P e pequise por "Python: Select Interpreter". Slecione o interpretador "venv\Scripts\python.exe". A partir desse momento o VS Code irá usar o Phyton para executar o projeto.
+    ### Instale as Libs por usar o comando "pip install netmiko flask" no terminal do VS Code.
+    ### No painel do VS Code, abra o diretório .\frontend\ e execute a gui.py, por usar o comando "python gui.py", no terminal (com o ambiente virtual ativado)
+    ### Após a execução, o terminal deverá apresentar algo semelhante a: * Running on http://127.0.0.1:5000
+    ### O endereço apresentado deverá ser aberto no navegador para acessar a interface gráfica.
+
+
+
     ### 2.0.1 Administrador deve abrir o frontend
     ### 2.0.2 Inserir:
         #### ID da VLAN
