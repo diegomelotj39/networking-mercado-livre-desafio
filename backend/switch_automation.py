@@ -1,3 +1,5 @@
+Veja o codigo todo:
+
 from netmiko import ConnectHandler
 import datetime
 import os
@@ -85,10 +87,12 @@ def save_config(connection):
 
     try:
         connection.save_config()
+
         print("[OK] Configuração salva!")
 
     except Exception:
         connection.send_command("write memory")
+
         print("[OK] Configuração salva com write memory!")
 
 
@@ -100,10 +104,7 @@ def backup_config(
     hostname="SWITCH_AUTOMATIZADO",
     backup_dir="backups"
 ):
-<<<<<<< HEAD
-=======
 
->>>>>>> 76f3ee8e3d9e2c369f783177e1012aa1719a2973
     if not os.path.exists(backup_dir):
         os.makedirs(backup_dir)
 
@@ -133,6 +134,9 @@ def backup_config(
 
     print(f"[OK] Backup salvo em: {filepath}")
 
+    # -----------------------------
+    # Envio do backup para FTP
+    # -----------------------------
     try:
         print(
             "[INFO] Conectando ao servidor FTP 10.10.10.1..."
@@ -169,10 +173,7 @@ def backup_config(
 # Validação de Hostname
 # -----------------------------
 def get_current_hostname(connection):
-<<<<<<< HEAD
-=======
 
->>>>>>> 76f3ee8e3d9e2c369f783177e1012aa1719a2973
     output = connection.send_command(
         "show running-config | include hostname"
     )
@@ -224,10 +225,7 @@ def validate_config(
     vlans,
     expected_hostname="SWITCH_AUTOMATIZADO"
 ):
-<<<<<<< HEAD
-=======
 
->>>>>>> 76f3ee8e3d9e2c369f783177e1012aa1719a2973
     print("[INFO] Validando configurações aplicadas...")
 
     alerts = []
