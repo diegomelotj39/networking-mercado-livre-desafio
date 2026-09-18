@@ -2,7 +2,7 @@
 
 Este projeto implementa a automação de configuração de um switch Cisco utilizando Python, um frontend para entrada de dados (Flask) e as bibliotecas para automação de rede (Netmiko, Paramiko ou Nornir).
 
-Adicionalmente, o repositório público https://github.com/diegomelotj39/networking-mercado-livre-desafio contém um plano de automação para configuração de uma VPN IPSec entre firewalls Fortigate e Palo Alto.
+Adicionalmente, o repositório público https://github.com/diegomelotj39/networking-mercado-livre-desafio contém um plano de automação para configuração de uma VPN IPSec entre firewalls Fortigate e Palo Alto, que pode ser encontrado em "docs\fortigate_example_config.txt" e "docs\paloalto_example_config.txt". Também há, no mesmo repositório um aquivo MD contendo script para ser aplicados em Firewalls Fortigate e Paloalto para então fechar uma VPN entre os firewalls (vpn_ipsec_automation.md)
 
 Também traz informações sobre como interagir com o frontend ## 2.0
 
