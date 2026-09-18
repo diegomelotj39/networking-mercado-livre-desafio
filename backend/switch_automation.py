@@ -1,5 +1,3 @@
-Veja o codigo todo:
-
 from netmiko import ConnectHandler
 import datetime
 import os
