@@ -1,6 +1,6 @@
 ## Documentando o desafio de Automação proposto pela Mercado Livre ##
 
-Este projeto implementa a automação de configuração de um switch Cisco utilizando Python, um frontend para entrada de dados (Tkinter, PyQt ou Flask) e as bibliotecas para automação de rede (Netmiko, Paramiko ou Nornir).
+Este projeto implementa a automação de configuração de um switch Cisco utilizando Python, um frontend para entrada de dados (Flask) e as bibliotecas para automação de rede (Netmiko, Paramiko ou Nornir).
 
 Adicionalmente, o repositório público https://github.com/diegomelotj39/networking-mercado-livre-desafio contém um plano de automação para configuração de uma VPN IPSec entre firewalls Fortigate e Palo Alto.
 
