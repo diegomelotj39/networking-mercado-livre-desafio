@@ -23,7 +23,7 @@ Também traz informações sobre como interagir com o frontend ## 2.0
 
     ### Abrir o Visual Studio Code.
     ### Selecionar: File → Open Folder...
-    ### Selecionar a pasta principal do projeto (C:\Users\diego\OneDrive\Área de Trabalho\Meli\networking-mercado-livre-desafio)
+    ### Selecionar a pasta principal do projeto (\Meli\networking-mercado-livre-desafio)
     ### Abra o terminal do VS Code.
         No VS Code, acessar: Terminal → New Terminal e então verifique se o Phyton está instalado, por usar o comando "python --version".
     ### Crie o ambiente virtual, por usar o comando "python -m venv venv"
